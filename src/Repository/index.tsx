@@ -1,7 +1,8 @@
 import React from "react";
 import AppLoading from "expo-app-loading";
-import { Container, Title } from "./styles";
+import { Container, Content, Header, Title } from "./styles";
 import { Roboto_500Medium, useFonts } from "@expo-google-fonts/roboto";
+import { Text, View, Image, TouchableOpacity } from "react-native";
 
 const Repository = () => {
   let [fontsLoaded] = useFonts({
@@ -14,7 +15,15 @@ const Repository = () => {
 
   return (
     <Container>
-      <Title font="Roboto_500Medium">WeFit</Title>
+      <Header>
+        <Title font="Roboto_500Medium">WeFit</Title>
+        <TouchableOpacity>
+          <Image source={require("./assets/settings.png")} />
+        </TouchableOpacity>
+      </Header>
+      <Content>
+        <Text>ola</Text>
+      </Content>
     </Container>
   );
 };

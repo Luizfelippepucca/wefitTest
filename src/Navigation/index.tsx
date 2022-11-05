@@ -17,7 +17,7 @@ const Navigation = () => {
   }
   return (
     <Tab.Navigator
-      initialRouteName="Favoritos"
+      initialRouteName="Repositórios"
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => {

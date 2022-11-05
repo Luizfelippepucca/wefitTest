@@ -4,7 +4,6 @@ export const Container = styled.SafeAreaView`
   flex: 1;
   padding: 20px 10px;
   align-items: center;
-  justify-content: center;
 `;
 
 type TitleProps = {
