@@ -1,16 +1,12 @@
 import React from "react";
-import { Container, Content, Header, Title } from "./styles";
-import { Text, Image, TouchableOpacity } from "react-native";
+import { Container, Content } from "./styles";
+import { Text } from "react-native";
+import Header from "@components/Header";
 
 const Repository = () => {
   return (
     <Container>
-      <Header>
-        <Title font="Roboto_500Medium">WeFit</Title>
-        <TouchableOpacity>
-          <Image source={require("./assets/settings.png")} />
-        </TouchableOpacity>
-      </Header>
+      <Header />
       <Content>
         <Text>ola</Text>
       </Content>
