@@ -1,13 +1,14 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { View } from "react-native";
-import Home from "./src/Home";
+import { StatusBar } from "expo-status-bar";
+import { NavigationContainer } from "@react-navigation/native";
+import { View, Text } from "react-native";
+import Navigation from "./src/Navigation";
 
 export default function App() {
   return (
-    <View>
+    <NavigationContainer>
       <StatusBar style="auto" />
-      <Home />
-    </View>
+      <Navigation />
+    </NavigationContainer>
   );
 }
