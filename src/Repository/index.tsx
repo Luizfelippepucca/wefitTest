@@ -3,7 +3,7 @@ import AppLoading from "expo-app-loading";
 import { Container, Title } from "./styles";
 import { Roboto_500Medium, useFonts } from "@expo-google-fonts/roboto";
 
-const Details = () => {
+const Repository = () => {
   let [fontsLoaded] = useFonts({
     Roboto_500Medium,
   });
@@ -14,9 +14,9 @@ const Details = () => {
 
   return (
     <Container>
-      <Title font="Roboto_500Medium">WeFit Details</Title>
+      <Title font="Roboto_500Medium">WeFit</Title>
     </Container>
   );
 };
 
-export default Details;
+export default Repository;

@@ -2,10 +2,8 @@ import React from "react";
 import AppLoading from "expo-app-loading";
 import { Container, Title } from "./styles";
 import { Roboto_500Medium, useFonts } from "@expo-google-fonts/roboto";
-import { useNavigation } from "@react-navigation/native";
 
-const Home = () => {
-  const navigation = useNavigation();
+const Favorite = () => {
   let [fontsLoaded] = useFonts({
     Roboto_500Medium,
   });
@@ -16,9 +14,9 @@ const Home = () => {
 
   return (
     <Container>
-      <Title font="Roboto_500Medium">WeFit</Title>
+      <Title font="Roboto_500Medium">WeFit Details</Title>
     </Container>
   );
 };
 
-export default Home;
+export default Favorite;
