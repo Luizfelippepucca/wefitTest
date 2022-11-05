@@ -2,19 +2,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Repository from "../Repository";
 import Favorite from "../Favorite";
 import { Image } from "react-native";
-import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
-import AppLoading from "expo-app-loading";
 
 const Navigation = () => {
   const Tab = createBottomTabNavigator();
 
-  let [fontsLoaded] = useFonts({
-    Roboto_400Regular,
-  });
-
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
   return (
     <Tab.Navigator
       initialRouteName="Repositórios"
