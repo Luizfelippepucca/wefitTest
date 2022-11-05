@@ -32,7 +32,7 @@ const Navigation = () => {
           }
           return <Image source={require("./assets/star.png")} />;
         },
-        tabBarStyle: { padding: 8 },
+        tabBarStyle: { paddingBottom: 8, paddingTop: 8, height: 59 },
         tabBarLabelStyle: {
           fontFamily: "Roboto_400Regular",
           fontSize: 14,
