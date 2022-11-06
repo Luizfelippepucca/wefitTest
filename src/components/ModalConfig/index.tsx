@@ -1,20 +1,21 @@
-import { Text, View } from "react-native";
+import { View, TouchableWithoutFeedback } from "react-native";
 import { Dimensions } from "react-native";
-const ModalConfig = () => {
+import { ModalConfigProps } from "./types";
+
+const ModalConfig = ({ onClose }: ModalConfigProps) => {
   const windowWidth = Dimensions.get("window").width;
-  const windowHeight = Dimensions.get("window").height;
   return (
-    <View
-      style={{
-        width: windowWidth,
-        height: windowHeight,
-        backgroundColor: "#ff0000",
-        position: "absolute",
-        zIndex: 2,
-      }}
-    >
-      <Text>modal</Text>
-    </View>
+    <TouchableWithoutFeedback onPress={onClose}>
+      <View
+        style={{
+          width: windowWidth,
+          height: "100%",
+          backgroundColor: "rgba(0,0,0,0.5)",
+          position: "absolute",
+          zIndex: 1,
+        }}
+      ></View>
+    </TouchableWithoutFeedback>
   );
 };
 

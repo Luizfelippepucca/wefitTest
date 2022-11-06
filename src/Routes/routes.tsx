@@ -1,10 +1,7 @@
 import Repository from "../Repository";
 import Favorite from "../Favorite";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-export type RootStackParams = {
-  Repository: undefined;
-  Favorites: undefined;
-};
+
 const Routes = () => {
   const Stack = createNativeStackNavigator();
 

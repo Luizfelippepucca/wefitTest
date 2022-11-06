@@ -6,7 +6,7 @@ import MenuTabs from "@components/MenuTabs";
 const Favorite = () => {
   return (
     <Container>
-      <Header />
+      <Header click={() => console.log("clicou")} />
       <Title font="Roboto_500Medium">WeFit Details</Title>
       <MenuTabs />
     </Container>

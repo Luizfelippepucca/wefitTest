@@ -1,5 +1,5 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParams } from "@routes/routes";
+import { RootStackParams } from "@routes/types";
 
 export type RepositoryScreenProps = NativeStackNavigationProp<
   RootStackParams,
