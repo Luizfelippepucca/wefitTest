@@ -29,3 +29,12 @@ export const ItemTab = styled.View`
 `;
 
 export const IconTabs = styled.Image``;
+interface LabelProps {
+  font: string;
+  focus?: boolean;
+}
+export const LabelTabs = styled.Text<LabelProps>`
+  font-family: ${({ font }) => font};
+  font-size: ${({ focus }) => (focus ? "14px" : "12px")};
+  color: ${({ focus }) => (focus ? "#1976D2" : "rgba(0,0,0,0.6)")};
+`;
