@@ -1,16 +1,22 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Container, Content } from "./styles";
 import { Text } from "react-native";
 import Header from "@components/Header";
+import ModalConfig from "@components/ModalConfig";
+import MenuTabs from "@components/MenuTabs";
 
 const Repository = () => {
   return (
-    <Container>
-      <Header />
-      <Content>
-        <Text>ola</Text>
-      </Content>
-    </Container>
+    <Fragment>
+      {/* <ModalConfig /> */}
+      <Container>
+        <Header />
+        <Content>
+          <Text>ola</Text>
+        </Content>
+        <MenuTabs />
+      </Container>
+    </Fragment>
   );
 };
 

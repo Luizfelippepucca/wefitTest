@@ -2,7 +2,9 @@ import styled from "styled-components/native";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
-  padding: 20px 10px;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 `;
 
