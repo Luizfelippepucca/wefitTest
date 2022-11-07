@@ -21,6 +21,15 @@ const Repository = () => {
     outputRange: ["0deg", "360deg"],
   });
 
+  Animated.loop(
+    Animated.timing(spin, {
+      toValue: 9,
+      duration: 800,
+      easing: Easing.ease,
+      useNativeDriver: true,
+    })
+  ).start();
+
   const handleToggleModal = () => {
     setOpenModal(!openModal);
   };
@@ -30,6 +39,7 @@ const Repository = () => {
       const jsonValue = await AsyncStorage.getItem("@asyncStorage:userName");
       if (jsonValue !== null) {
         setValue(jsonValue);
+
         return;
       }
     } catch (e) {
@@ -72,15 +82,6 @@ const Repository = () => {
         console.log({ component: "Repository", erro: err });
       });
   }, [value, setLoading]);
-
-  Animated.loop(
-    Animated.timing(spin, {
-      toValue: 9,
-      duration: 800,
-      easing: Easing.ease,
-      useNativeDriver: true,
-    })
-  ).start();
 
   if (list.length <= 0) {
     return (
