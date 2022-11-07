@@ -16,8 +16,8 @@ export const Overlay = styled.View`
 
 export const Box = styled.View<BoxProps>`
   background-color: #fff;
-  width: ${windowWidth};
-  height: ${({ height }) => height};
+  width: 100%;
+  height: ${({ height }) => height}px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   flex-direction: column;
@@ -58,6 +58,9 @@ export const Input = styled.TextInput`
   font-size: 16px;
   padding-top: 10px;
   font-family: "Roboto_400Regular";
+  ::placeholder {
+    color: #000;
+  }
 `;
 
 export const LabelInsideInput = styled.Text`
