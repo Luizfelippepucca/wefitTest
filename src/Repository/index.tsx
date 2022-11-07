@@ -43,7 +43,7 @@ const Repository = () => {
         return;
       }
     } catch (e) {
-      console.log(e);
+      setValue("");
     }
   };
 
@@ -79,7 +79,6 @@ const Repository = () => {
       .catch((err) => {
         setList([]);
         setLoading(false);
-        console.log({ component: "Repository", erro: err });
       });
   }, [value, setLoading]);
 
@@ -114,7 +113,7 @@ const Repository = () => {
         {!loading && (
           <Content>
             <FlatList
-              style={{ marginHorizontal: 16 }}
+              style={{ marginHorizontal: 16, marginBottom: 10 }}
               data={list}
               renderItem={renderItem}
               keyExtractor={(item) => item.id}
