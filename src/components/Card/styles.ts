@@ -21,10 +21,15 @@ export const CardHeader = styled.View`
 `;
 
 export const WrapperTitle = styled.View`
+  width: 70%;
   flex-direction: row;
 `;
 
-export const LogoCard = styled.Image``;
+export const AvatarCard = styled.Image`
+  width: 29px;
+  height: 29px;
+  border-radius: 14.5px;
+`;
 
 export const Title = styled.Text`
   font-family: "Inter_400Regular";

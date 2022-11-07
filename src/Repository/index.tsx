@@ -9,10 +9,22 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Card, { CardProps } from "@components/Card";
 import axios from "axios";
 
+export interface RequestProps {
+  full_name: string;
+  description: string;
+  stargazers_count: string;
+  language: string;
+  html_url: string;
+  id: number;
+  owner: {
+    avatar_url: string;
+  };
+}
+
 const Repository = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
-  const [list, setList] = useState<CardProps[]>([]);
+  const [list, setList] = useState<RequestProps[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const AnimatedLoading = Animated.createAnimatedComponent(Loading);
   const spin = new Animated.Value(0);
@@ -47,7 +59,7 @@ const Repository = () => {
     }
   };
 
-  const renderItem: ListRenderItem<CardProps> = ({ item }) => {
+  const renderItem: ListRenderItem<RequestProps> = ({ item }) => {
     return (
       <Card
         full_name={item.full_name}
@@ -57,6 +69,7 @@ const Repository = () => {
         id={item.id}
         stargazers_count={item.stargazers_count}
         key={item.id}
+        avatar={item.owner.avatar_url}
       />
     );
   };

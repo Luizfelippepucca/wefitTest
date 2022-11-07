@@ -23,6 +23,7 @@ export const AreaDetails = styled.View`
 `;
 
 export const WrapperTitle = styled.View`
+  width: 100%;
   flex-direction: row;
   margin-bottom: 16px;
 `;

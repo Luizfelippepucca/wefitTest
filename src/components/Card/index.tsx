@@ -11,7 +11,7 @@ import {
   WrapperDescription,
   Description,
   CardFooter,
-  LogoCard,
+  AvatarCard,
   BtnFavorite,
   Textfavorite,
   WrapperNumberOfStars,
@@ -27,7 +27,9 @@ export interface CardProps {
   language: string;
   html_url: string;
   id: number;
+  avatar: string;
 }
+
 const Card = ({
   description,
   full_name,
@@ -35,6 +37,7 @@ const Card = ({
   html_url,
   language,
   stargazers_count,
+  avatar,
 }: CardProps) => {
   const nameFull = full_name.split("/");
   const title = nameFull[0];
@@ -63,7 +66,8 @@ const Card = ({
             <Title>{title}</Title>
             <SubTitle>/{subtitle}</SubTitle>
           </WrapperTitle>
-          <LogoCard source={require("./assets/logo.png")} />
+
+          <AvatarCard source={{ uri: avatar }} />
         </CardHeader>
         <WrapperDescription>
           <Description>{description}</Description>
