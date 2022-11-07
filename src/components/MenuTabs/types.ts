@@ -10,3 +10,8 @@ export type FavoritesScreenProps = NativeStackNavigationProp<
   RootStackParams,
   "Favorites"
 >;
+
+export type DetailsScreenProps = NativeStackNavigationProp<
+  RootStackParams,
+  "Details"
+>;

@@ -1,3 +1,5 @@
+import { DetailsScreenProps } from "@components/MenuTabs/types";
+import { useNavigation } from "@react-navigation/native";
 import { Image, TouchableWithoutFeedback } from "react-native";
 import {
   Container,
@@ -36,9 +38,13 @@ const Card = ({
   const nameFull = full_name.split("/");
   const title = nameFull[0];
   const subtitle = nameFull[1];
+  const { navigate } = useNavigation<DetailsScreenProps>();
 
+  const handleNavigate = () => {
+    navigate("Details");
+  };
   return (
-    <TouchableWithoutFeedback onPress={() => console.log(full_name)}>
+    <TouchableWithoutFeedback onPress={handleNavigate}>
       <Container style={{ elevation: 5 }}>
         <CardHeader>
           <WrapperTitle>
