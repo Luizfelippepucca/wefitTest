@@ -1,4 +1,5 @@
 import { DetailsScreenProps } from "@components/MenuTabs/types";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { Image, TouchableWithoutFeedback } from "react-native";
 import {
@@ -25,7 +26,7 @@ export interface CardProps {
   stargazers_count: string;
   language: string;
   html_url: string;
-  id: string;
+  id: number;
 }
 const Card = ({
   description,
@@ -40,7 +41,18 @@ const Card = ({
   const subtitle = nameFull[1];
   const { navigate } = useNavigation<DetailsScreenProps>();
 
-  const handleNavigate = () => {
+  const handleNavigate = async () => {
+    const element = {
+      description,
+      full_name,
+      id,
+      html_url,
+      language,
+    };
+    await AsyncStorage.setItem(
+      "@AsyncStorage:infosCard",
+      JSON.stringify(element)
+    );
     navigate("Details");
   };
   return (

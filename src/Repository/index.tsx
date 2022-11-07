@@ -116,7 +116,7 @@ const Repository = () => {
               style={{ marginHorizontal: 16, marginBottom: 10 }}
               data={list}
               renderItem={renderItem}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item.full_name}
             />
           </Content>
         )}
