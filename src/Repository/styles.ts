@@ -15,6 +15,5 @@ export const Content = styled.View`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  background-color: #c3c3c3;
-  padding: 0px 16px;
+  padding: 16px;
 `;

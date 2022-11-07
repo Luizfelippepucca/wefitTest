@@ -8,11 +8,14 @@ import {
   Roboto_400Regular,
   Roboto_500Medium,
 } from "@expo-google-fonts/roboto";
+import { Inter_400Regular, Inter_700Bold } from "@expo-google-fonts/inter";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
     Roboto_400Regular,
     Roboto_500Medium,
+    Inter_400Regular,
+    Inter_700Bold,
   });
 
   if (!fontsLoaded) {

@@ -6,10 +6,12 @@ import ModalConfig from "@components/ModalConfig";
 import MenuTabs from "@components/MenuTabs";
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Card from "@components/Card";
 
 const Repository = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
+
   const handleToggleModal = () => {
     setOpenModal(!openModal);
   };
@@ -37,7 +39,7 @@ const Repository = () => {
       <Container>
         <Header click={handleToggleModal} />
         <Content>
-          <Text>ola</Text>
+          <Card />
         </Content>
         <MenuTabs />
       </Container>
