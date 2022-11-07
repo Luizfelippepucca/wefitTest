@@ -1,7 +1,7 @@
 import { DetailsScreenProps } from "@components/MenuTabs/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Image, TouchableWithoutFeedback } from "react-native";
 import {
   Container,
@@ -44,6 +44,7 @@ const Card = ({
   const title = nameFull[0];
   const subtitle = nameFull[1];
   const { navigate } = useNavigation<DetailsScreenProps>();
+  const [listFavorite, setListfavorite] = useState<any[]>([]);
 
   const handleNavigate = async () => {
     const element = {
@@ -59,6 +60,21 @@ const Card = ({
     );
     navigate("Details");
   };
+
+  const handelFavoriteAdd = async () => {
+    const itemFavorite = {
+      description,
+      full_name,
+      id,
+      html_url,
+      language,
+    };
+
+    const list = [];
+    list.push(itemFavorite);
+    setListfavorite(list);
+  };
+  // console.log(listFavorite);
   return (
     <TouchableWithoutFeedback onPress={handleNavigate}>
       <Container style={{ elevation: 5 }}>
@@ -74,7 +90,7 @@ const Card = ({
           <Description>{description}</Description>
         </WrapperDescription>
         <CardFooter>
-          <BtnFavorite>
+          <BtnFavorite onPress={handelFavoriteAdd}>
             <Image source={require("./assets/star.png")} />
             <Textfavorite>Favoritar</Textfavorite>
           </BtnFavorite>

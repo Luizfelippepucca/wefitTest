@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useCallback, useEffect } from "react";
 import { Container, Content, ContentLoading, Loading } from "./styles";
 import { Animated, Easing, FlatList, ListRenderItem, Text } from "react-native";
 import Header from "@components/Header";
@@ -47,15 +47,11 @@ const Repository = () => {
   };
 
   const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("@asyncStorage:userName");
-      if (jsonValue !== null) {
-        setValue(jsonValue);
+    const jsonValue = await AsyncStorage.getItem("@asyncStorage:userName");
 
-        return;
-      }
-    } catch (e) {
-      setValue("");
+    if (jsonValue !== null) {
+      setValue(jsonValue);
+      return;
     }
   };
 
@@ -80,6 +76,7 @@ const Repository = () => {
 
   useEffect(() => {
     setLoading(true);
+
     axios
       .get(`https://api.github.com/users/${value}/repos`)
       .then((resp) => {
@@ -88,12 +85,13 @@ const Repository = () => {
           setLoading(false);
           return;
         }
+
+        setLoading(false);
       })
       .catch((err) => {
-        setList([]);
         setLoading(false);
       });
-  }, [value, setLoading]);
+  }, [value]);
 
   if (list.length <= 0) {
     return (
