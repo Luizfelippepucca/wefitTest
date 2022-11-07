@@ -8,6 +8,7 @@ export const Container = styled.View`
   flex-direction: column;
   align-items: center;
   padding: 12px 16px;
+  margin-top: 10px;
 `;
 
 export const CardHeader = styled.View`

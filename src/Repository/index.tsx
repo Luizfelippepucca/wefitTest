@@ -1,12 +1,36 @@
 import React, { Fragment, useCallback, useEffect } from "react";
 import { Container, Content } from "./styles";
-import { Text } from "react-native";
+import {
+  FlatList,
+  ListRenderItem,
+  ListRenderItemInfo,
+  TouchableOpacity,
+} from "react-native";
 import Header from "@components/Header";
 import ModalConfig from "@components/ModalConfig";
 import MenuTabs from "@components/MenuTabs";
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Card from "@components/Card";
+import Card, { CardProps } from "@components/Card";
+
+const Data: CardProps[] = [
+  {
+    full_name: "Luiz Pucca",
+    description: "alguma descrição",
+    stargazers_count: "10",
+    language: "Typescript",
+    html_url: "https://github.com/appswefit",
+    id: "1",
+  },
+  {
+    full_name: "Luiz Pucca2",
+    description: "alguma descrição",
+    stargazers_count: "10",
+    language: "Typescript",
+    html_url: "https://github.com/appswefit",
+    id: "2",
+  },
+];
 
 const Repository = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -29,9 +53,22 @@ const Repository = () => {
     }
   };
 
+  const renderItem: ListRenderItem<CardProps> = ({ item }) => {
+    return (
+      <Card
+        full_name={item.full_name}
+        description={item.description}
+        html_url={item.html_url}
+        language={item.language}
+        id={item.id}
+        stargazers_count={item.stargazers_count}
+        key={item.id}
+      />
+    );
+  };
+
   useEffect(() => {
     getData();
-    console.log(value);
   }, [getData, value]);
   return (
     <Fragment>
@@ -39,7 +76,12 @@ const Repository = () => {
       <Container>
         <Header click={handleToggleModal} />
         <Content>
-          <Card />
+          <FlatList
+            style={{ marginHorizontal: 16 }}
+            data={Data}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+          />
         </Content>
         <MenuTabs />
       </Container>
