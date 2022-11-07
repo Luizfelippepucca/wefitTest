@@ -1,6 +1,7 @@
 import { DetailsScreenProps } from "@components/MenuTabs/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { Fragment } from "react";
 import { Image, TouchableWithoutFeedback } from "react-native";
 import {
   Container,
@@ -82,8 +83,12 @@ const Card = ({
             <TextNumberStar>{stargazers_count}</TextNumberStar>
           </WrapperNumberOfStars>
           <Badge>
-            <Image source={require("./assets/badge.png")} />
-            <BadgeText>{language}</BadgeText>
+            {language !== null && (
+              <Fragment>
+                <Image source={require("./assets/badge.png")} />
+                <BadgeText>{language}</BadgeText>
+              </Fragment>
+            )}
           </Badge>
         </CardFooter>
       </Container>

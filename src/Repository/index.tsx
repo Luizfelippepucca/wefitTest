@@ -6,7 +6,7 @@ import ModalConfig from "@components/ModalConfig";
 import MenuTabs from "@components/MenuTabs";
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Card, { CardProps } from "@components/Card";
+import Card from "@components/Card";
 import axios from "axios";
 
 export interface RequestProps {

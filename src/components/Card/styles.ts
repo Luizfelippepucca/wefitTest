@@ -79,10 +79,10 @@ export const Textfavorite = styled.Text`
 `;
 
 export const WrapperNumberOfStars = styled.View`
-  min-width: 30px;
+  flex: 1;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 export const TextNumberStar = styled.Text`
@@ -92,8 +92,10 @@ export const TextNumberStar = styled.Text`
 `;
 
 export const Badge = styled.View`
+  width: 100%;
+  max-width: 126px;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
 `;
 
