@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
-import { Container, Content } from "./styles";
-import { FlatList, ListRenderItem, Text } from "react-native";
+import { Container, Content, ContentLoading, Loading } from "./styles";
+import { Animated, Easing, FlatList, ListRenderItem, Text } from "react-native";
 import Header from "@components/Header";
 import ModalConfig from "@components/ModalConfig";
 import MenuTabs from "@components/MenuTabs";
@@ -13,6 +13,13 @@ const Repository = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
   const [list, setList] = useState<CardProps[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const AnimatedLoading = Animated.createAnimatedComponent(Loading);
+  const spin = new Animated.Value(0);
+  const rotate = spin.interpolate({
+    inputRange: [0, 9],
+    outputRange: ["0deg", "360deg"],
+  });
 
   const handleToggleModal = () => {
     setOpenModal(!openModal);
@@ -26,7 +33,6 @@ const Repository = () => {
         return;
       }
     } catch (e) {
-      // error reading value
       console.log(e);
     }
   };
@@ -50,28 +56,47 @@ const Repository = () => {
   }, [getData]);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`https://api.github.com/users/${value}/repos`)
       .then((resp) => {
         if (resp.status === 200) {
           setList(resp.data);
+          setLoading(false);
           return;
         }
       })
-      .catch((err) => console.log(err));
-  }, [value]);
+      .catch((err) => {
+        setList([]);
+        setLoading(false);
+        console.log({ component: "Repository", erro: err });
+      });
+  }, [value, setLoading]);
+
+  Animated.loop(
+    Animated.timing(spin, {
+      toValue: 9,
+      duration: 800,
+      easing: Easing.ease,
+      useNativeDriver: true,
+    })
+  ).start();
 
   if (list.length <= 0) {
     return (
-      <Container>
-        <Header click={handleToggleModal} />
-        <Content>
-          <Text style={{ textAlign: "center" }}>
-            Nenhum usuario encontrado,faça uma busca
-          </Text>
-        </Content>
-        <MenuTabs />
-      </Container>
+      <Fragment>
+        {openModal && <ModalConfig onClose={handleToggleModal} />}
+        <Container>
+          <Header click={handleToggleModal} />
+          <Content>
+            <Text style={{ textAlign: "center" }}>
+              Nenhum usuario encontrado,clique em configurações e faça uma
+              busca.
+            </Text>
+          </Content>
+          <MenuTabs />
+        </Container>
+      </Fragment>
     );
   }
 
@@ -80,14 +105,21 @@ const Repository = () => {
       {openModal && <ModalConfig onClose={handleToggleModal} />}
       <Container>
         <Header click={handleToggleModal} />
-        <Content>
-          <FlatList
-            style={{ marginHorizontal: 16 }}
-            data={list}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-          />
-        </Content>
+        {loading && (
+          <ContentLoading>
+            <AnimatedLoading style={{ transform: [{ rotate }] }} />
+          </ContentLoading>
+        )}
+        {!loading && (
+          <Content>
+            <FlatList
+              style={{ marginHorizontal: 16 }}
+              data={list}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.id}
+            />
+          </Content>
+        )}
         <MenuTabs />
       </Container>
     </Fragment>
