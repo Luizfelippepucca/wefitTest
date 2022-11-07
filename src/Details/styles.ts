@@ -22,11 +22,6 @@ export const AreaDetails = styled.View`
   width: 100%;
 `;
 
-export const AreaButtons = styled.View`
-  background-color: #ff0;
-  width: 100%;
-  height: 200px;
-`;
 export const WrapperTitle = styled.View`
   flex-direction: row;
   margin-bottom: 16px;
@@ -34,13 +29,13 @@ export const WrapperTitle = styled.View`
 
 export const Title = styled.Text`
   font-family: "Inter_400Regular";
-  font-size: 20px;
+  font-size: 16px;
   color: #070707;
 `;
 
 export const SubTitle = styled.Text`
   font-family: "Inter_700Bold";
-  font-size: 20px;
+  font-size: 16px;
   color: #070707;
 `;
 
@@ -61,4 +56,45 @@ export const BadgeText = styled.Text`
   font-size: 12px;
   font-family: "Inter_400Regular";
   padding-left: 4px;
+`;
+export const AreaButtons = styled.View`
+  width: 100%;
+  height: 100px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const BtnFavorite = styled.TouchableOpacity`
+  background-color: #ffd02c;
+  border-radius: 4px;
+  width: 100%;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+`;
+
+export const TextBtn = styled.Text`
+  color: #000;
+  font-family: "Roboto_500Medium";
+  font-size: 15px;
+  margin: 0px 10px;
+  text-transform: uppercase;
+`;
+
+export const LinkContainer = styled.TouchableOpacity`
+  width: 100%;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+`;
+
+export const TextLink = styled.Text`
+  color: #1976d2;
+  font-family: "Roboto_500Medium";
+  font-size: 15px;
+  margin: 0px 10px;
+  text-transform: uppercase;
 `;

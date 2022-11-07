@@ -3,7 +3,7 @@ import Header from "@components/Header";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { Text, Image } from "react-native";
+import { Text, Image, Linking } from "react-native";
 import {
   Container,
   Content,
@@ -15,6 +15,10 @@ import {
   Description,
   Badge,
   BadgeText,
+  BtnFavorite,
+  TextBtn,
+  LinkContainer,
+  TextLink,
 } from "./styles";
 
 const Details = () => {
@@ -26,6 +30,10 @@ const Details = () => {
 
   const handleNavigate = () => {
     goBack();
+  };
+
+  const handleOpenLink = () => {
+    Linking.openURL(`${cardItem?.html_url}`);
   };
 
   const getDataCard = async () => {
@@ -57,7 +65,14 @@ const Details = () => {
           </Badge>
         </AreaDetails>
         <AreaButtons>
-          <Text>detalhes</Text>
+          <LinkContainer onPress={handleOpenLink}>
+            <TextLink>Ver repositório</TextLink>
+            <Image source={require(`./assets/link.png`)} />
+          </LinkContainer>
+          <BtnFavorite style={{ elevation: 2 }}>
+            <TextBtn>Favoritar</TextBtn>
+            <Image source={require(`./assets/starDark.png`)} />
+          </BtnFavorite>
         </AreaButtons>
       </Content>
     </Container>
