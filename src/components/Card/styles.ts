@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
   width: 100%;
-  height: 151px;
+  min-height: 151px;
   border-radius: 4px;
   background-color: #fff;
   flex-direction: column;
@@ -39,6 +39,7 @@ export const SubTitle = styled.Text`
 export const WrapperDescription = styled.View`
   width: 100%;
   justify-content: center;
+  margin: 4px 0px;
 `;
 
 export const Description = styled.Text`
@@ -73,7 +74,7 @@ export const Textfavorite = styled.Text`
 `;
 
 export const WrapperNumberOfStars = styled.View`
-  width: 30px;
+  min-width: 30px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -86,9 +87,8 @@ export const TextNumberStar = styled.Text`
 `;
 
 export const Badge = styled.View`
-  width: 85px;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 `;
 
@@ -96,4 +96,5 @@ export const BadgeText = styled.Text`
   color: #9a9a9a;
   font-size: 12px;
   font-family: "Inter_400Regular";
+  padding-left: 4px;
 `;

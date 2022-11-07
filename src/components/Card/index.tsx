@@ -33,14 +33,17 @@ const Card = ({
   language,
   stargazers_count,
 }: CardProps) => {
-  console.log(language);
+  const nameFull = full_name.split("/");
+  const title = nameFull[0];
+  const subtitle = nameFull[1];
+
   return (
     <TouchableWithoutFeedback onPress={() => console.log(full_name)}>
-      <Container style={{ elevation: 10 }}>
+      <Container style={{ elevation: 5 }}>
         <CardHeader>
           <WrapperTitle>
-            <Title>{full_name}</Title>
-            <SubTitle>{full_name}</SubTitle>
+            <Title>{title}</Title>
+            <SubTitle>/{subtitle}</SubTitle>
           </WrapperTitle>
           <LogoCard source={require("./assets/logo.png")} />
         </CardHeader>

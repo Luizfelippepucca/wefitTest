@@ -8,4 +8,6 @@ export const Container = styled.SafeAreaView`
 export const Content = styled.View`
   width: 100%;
   flex: 1;
+  padding-bottom: 40px;
+  margin-bottom: 20px;
 `;

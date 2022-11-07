@@ -1,40 +1,18 @@
-import React, { Fragment, useCallback, useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Container, Content } from "./styles";
-import {
-  FlatList,
-  ListRenderItem,
-  ListRenderItemInfo,
-  TouchableOpacity,
-} from "react-native";
+import { FlatList, ListRenderItem, Text } from "react-native";
 import Header from "@components/Header";
 import ModalConfig from "@components/ModalConfig";
 import MenuTabs from "@components/MenuTabs";
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Card, { CardProps } from "@components/Card";
-
-const Data: CardProps[] = [
-  {
-    full_name: "Luiz Pucca",
-    description: "alguma descrição",
-    stargazers_count: "10",
-    language: "Typescript",
-    html_url: "https://github.com/appswefit",
-    id: "1",
-  },
-  {
-    full_name: "Luiz Pucca2",
-    description: "alguma descrição",
-    stargazers_count: "10",
-    language: "Typescript",
-    html_url: "https://github.com/appswefit",
-    id: "2",
-  },
-];
+import axios from "axios";
 
 const Repository = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
+  const [list, setList] = useState<CardProps[]>([]);
 
   const handleToggleModal = () => {
     setOpenModal(!openModal);
@@ -69,7 +47,34 @@ const Repository = () => {
 
   useEffect(() => {
     getData();
-  }, [getData, value]);
+  }, [getData]);
+
+  useEffect(() => {
+    axios
+      .get(`https://api.github.com/users/${value}/repos`)
+      .then((resp) => {
+        if (resp.status === 200) {
+          setList(resp.data);
+          return;
+        }
+      })
+      .catch((err) => console.log(err));
+  }, [value]);
+
+  if (list.length <= 0) {
+    return (
+      <Container>
+        <Header click={handleToggleModal} />
+        <Content>
+          <Text style={{ textAlign: "center" }}>
+            Nenhum usuario encontrado,faça uma busca
+          </Text>
+        </Content>
+        <MenuTabs />
+      </Container>
+    );
+  }
+
   return (
     <Fragment>
       {openModal && <ModalConfig onClose={handleToggleModal} />}
@@ -78,7 +83,7 @@ const Repository = () => {
         <Content>
           <FlatList
             style={{ marginHorizontal: 16 }}
-            data={Data}
+            data={list}
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
           />

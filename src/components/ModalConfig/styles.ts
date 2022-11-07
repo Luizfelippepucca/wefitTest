@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { Dimensions } from "react-native";
+import { Dimensions, TextInput } from "react-native";
 import { BoxProps, TextButtonProps } from "./types";
 
 const windowWidth = Dimensions.get("window").width;
@@ -17,7 +17,7 @@ export const Overlay = styled.View`
 export const Box = styled.View<BoxProps>`
   background-color: #fff;
   width: 100%;
-  height: ${({ height }) => height}px;
+  height: ${({ height }) => `${height}px`};
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   flex-direction: column;
@@ -44,7 +44,8 @@ export const ContentInput = styled.View`
 export const Label = styled.Text`
   font-family: "Roboto_400Regular";
   font-size: 16px;
-  color: rgba(0, 0, 0, 0.87);
+  color: #000;
+  opacity: 0.87;
 `;
 
 export const Input = styled.TextInput`
