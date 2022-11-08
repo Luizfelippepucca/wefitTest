@@ -44,7 +44,7 @@ export const SubTitle = styled.Text`
 
 export const WrapperDescription = styled.View`
   width: 100%;
-  justify-content: center;
+  min-height: 50px;
   margin: 4px 0px;
 `;
 
