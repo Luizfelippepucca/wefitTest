@@ -20,8 +20,6 @@ import { ModalConfigProps } from "./types";
 import useDebounce from "src/hooks";
 
 const ModalConfig = ({ onClose }: ModalConfigProps) => {
-  const AnimatedBox = Animated.createAnimatedComponent(Box);
-  const [height] = useState(new Animated.Value(0));
   const [teste, setTeste] = useState("");
   const { debounce } = useDebounce();
 
@@ -39,16 +37,10 @@ const ModalConfig = ({ onClose }: ModalConfigProps) => {
     onClose();
   };
 
-  Animated.timing(height, {
-    toValue: 200,
-    duration: 180,
-    useNativeDriver: false,
-  }).start();
-
   return (
     <TouchableWithoutFeedback onPress={onClose}>
       <Overlay>
-        <AnimatedBox height={height}>
+        <Box>
           <Divider />
           <ContentInput>
             <Label>Alterar usuário selecionado</Label>
@@ -69,7 +61,7 @@ const ModalConfig = ({ onClose }: ModalConfigProps) => {
               <TextButton>Salvar</TextButton>
             </BtnSave>
           </AreaButtons>
-        </AnimatedBox>
+        </Box>
       </Overlay>
     </TouchableWithoutFeedback>
   );

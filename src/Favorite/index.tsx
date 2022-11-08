@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Container, Content } from "./styles";
 import Header from "@components/Header";
 import MenuTabs from "@components/MenuTabs";
@@ -6,9 +6,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Card from "@components/Card";
 import { FlatList, ListRenderItem, Text } from "react-native";
 import { CardProps } from "@components/Card/types";
+import ModalConfig from "@components/ModalConfig";
 
 const Favorite = () => {
   const [favorites, setFavorites] = useState<CardProps[]>([]);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
+  const handleToggleModal = () => {
+    setOpenModal(!openModal);
+  };
   const getDataFaviorite = async () => {
     const favoriteJson = await AsyncStorage.getItem("@AsyncStorage:favorites");
 
@@ -39,29 +45,35 @@ const Favorite = () => {
 
   if (favorites.length <= 0) {
     return (
-      <Container>
-        <Header click={() => console.log("clicou")} />
-        <Content>
-          <Text>Você ainda não tem favoritos</Text>
-        </Content>
-        <MenuTabs />
-      </Container>
+      <Fragment>
+        {openModal && <ModalConfig onClose={handleToggleModal} />}
+        <Container>
+          <Header click={handleToggleModal} />
+          <Content>
+            <Text>Você ainda não tem favoritos</Text>
+          </Content>
+          <MenuTabs />
+        </Container>
+      </Fragment>
     );
   }
   return (
-    <Container>
-      <Header click={() => console.log("clicou")} />
-      <Content>
-        <FlatList
-          style={{ marginHorizontal: 16, marginBottom: 10 }}
-          renderItem={renderItem}
-          data={favorites}
-          keyExtractor={(item) => item.full_name}
-        />
-      </Content>
+    <Fragment>
+      {openModal && <ModalConfig onClose={handleToggleModal} />}
+      <Container>
+        <Header click={handleToggleModal} />
+        <Content>
+          <FlatList
+            style={{ marginHorizontal: 16, marginBottom: 10 }}
+            renderItem={renderItem}
+            data={favorites}
+            keyExtractor={(item) => item.full_name}
+          />
+        </Content>
 
-      <MenuTabs />
-    </Container>
+        <MenuTabs />
+      </Container>
+    </Fragment>
   );
 };
 

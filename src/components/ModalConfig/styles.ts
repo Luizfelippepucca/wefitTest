@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
-import { Dimensions, TextInput } from "react-native";
-import { BoxProps, TextButtonProps } from "./types";
+import { Dimensions } from "react-native";
+import { TextButtonProps } from "./types";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -14,10 +14,10 @@ export const Overlay = styled.View`
   align-items: center;
 `;
 
-export const Box = styled.View<BoxProps>`
+export const Box = styled.View`
   background-color: #fff;
   width: 100%;
-  height: ${({ height }) => `${height}px`};
+  height: 200px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   flex-direction: column;
