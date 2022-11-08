@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useCallback, useEffect } from "react";
 import { Container, Content, ContentLoading, Loading } from "./styles";
 import { Animated, Easing, FlatList, ListRenderItem, Text } from "react-native";
 import Header from "@components/Header";
@@ -86,7 +86,7 @@ const Repository = () => {
 
   useEffect(() => {
     getData();
-  }, [getData]);
+  }, [getData, loading]);
 
   useEffect(() => {
     setLoading(true);
@@ -105,7 +105,7 @@ const Repository = () => {
       .catch((err) => {
         setLoading(false);
       });
-  }, [value]);
+  }, [value, setList, setLoading]);
 
   if (list.length <= 0) {
     return (

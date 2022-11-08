@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { Container, Content } from "./styles";
 import Header from "@components/Header";
 import MenuTabs from "@components/MenuTabs";
@@ -15,14 +15,14 @@ const Favorite = () => {
   const handleToggleModal = () => {
     setOpenModal(!openModal);
   };
-  const getDataFaviorite = async () => {
+  const getDataFaviorite = useCallback(async () => {
     const favoriteJson = await AsyncStorage.getItem("@AsyncStorage:favorites");
 
     if (favoriteJson !== null) {
       const listFavorit: CardProps[] = JSON.parse(favoriteJson);
       setFavorites(listFavorit);
     }
-  };
+  }, [setFavorites]);
 
   const renderItem: ListRenderItem<CardProps> = ({ item }) => {
     return (

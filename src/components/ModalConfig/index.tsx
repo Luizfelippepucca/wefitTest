@@ -17,9 +17,12 @@ import {
   Overlay,
   TextButton,
 } from "./styles";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 const ModalConfig = ({ onClose }: ModalConfigProps) => {
   const [valueInput, setValueInput] = useState("");
+  const { goBack } = useNavigation();
+  const route = useRoute();
 
   const handleChangeUserName = (text: string) => {
     setValueInput(text);
@@ -28,6 +31,9 @@ const ModalConfig = ({ onClose }: ModalConfigProps) => {
   const handleSaveName = async () => {
     await AsyncStorage.setItem("@asyncStorage:userName", valueInput);
     onClose();
+    if (route.name === "Favorites") {
+      goBack();
+    }
   };
 
   return (
@@ -50,7 +56,6 @@ const ModalConfig = ({ onClose }: ModalConfigProps) => {
             </BtnCancel>
             <BtnSave
               style={{
-                shadowColor: "#000",
                 elevation: 2,
               }}
               onPress={handleSaveName}

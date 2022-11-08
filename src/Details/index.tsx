@@ -55,7 +55,7 @@ const Details = () => {
     );
     if (favoriteListJson !== null) {
       const list = JSON.parse(favoriteListJson);
-      console.log(list);
+
       list.map((element: CardProps) => {
         if (cardItem?.id === element.id) {
           setIsFavorite(true);
