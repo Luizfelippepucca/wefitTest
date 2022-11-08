@@ -16,3 +16,8 @@ export const Title = styled.Text<TitleProps>`
   font-family: ${({ font }) => font};
   font-size: 20px;
 `;
+
+export const Content = styled.View`
+  width: 100%;
+  flex: 1;
+`;

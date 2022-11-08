@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { WrappeNumberOfStartPorps } from "./types";
 
 export const Container = styled.View`
   width: 100%;
@@ -78,11 +79,12 @@ export const Textfavorite = styled.Text`
   font-size: 12px;
 `;
 
-export const WrapperNumberOfStars = styled.View`
+export const WrapperNumberOfStars = styled.View<WrappeNumberOfStartPorps>`
   flex: 1;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: ${({ route }) =>
+    route === "Favorites" ? "flex-start" : "center"};
 `;
 
 export const TextNumberStar = styled.Text`

@@ -1,7 +1,7 @@
 import { DetailsScreenProps } from "@components/MenuTabs/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
-import { Fragment, useState } from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { Image, TouchableWithoutFeedback } from "react-native";
 import {
   Container,
@@ -20,16 +20,7 @@ import {
   Badge,
   BadgeText,
 } from "./styles";
-
-export interface CardProps {
-  full_name: string;
-  description: string;
-  stargazers_count: string;
-  language: string;
-  html_url: string;
-  id: number;
-  avatar: string;
-}
+import { CardProps } from "./types";
 
 const Card = ({
   description,
@@ -39,12 +30,13 @@ const Card = ({
   language,
   stargazers_count,
   avatar,
+  cLick,
 }: CardProps) => {
   const nameFull = full_name.split("/");
   const title = nameFull[0];
   const subtitle = nameFull[1];
   const { navigate } = useNavigation<DetailsScreenProps>();
-  const [listFavorite, setListfavorite] = useState<any[]>([]);
+  const route = useRoute();
 
   const handleNavigate = async () => {
     const element = {
@@ -61,20 +53,6 @@ const Card = ({
     navigate("Details");
   };
 
-  const handelFavoriteAdd = async () => {
-    const itemFavorite = {
-      description,
-      full_name,
-      id,
-      html_url,
-      language,
-    };
-
-    const list = [];
-    list.push(itemFavorite);
-    setListfavorite(list);
-  };
-  // console.log(listFavorite);
   return (
     <TouchableWithoutFeedback onPress={handleNavigate}>
       <Container style={{ elevation: 5 }}>
@@ -90,11 +68,13 @@ const Card = ({
           <Description>{description}</Description>
         </WrapperDescription>
         <CardFooter>
-          <BtnFavorite onPress={handelFavoriteAdd}>
-            <Image source={require("./assets/star.png")} />
-            <Textfavorite>Favoritar</Textfavorite>
-          </BtnFavorite>
-          <WrapperNumberOfStars>
+          {route.name !== "Favorites" && (
+            <BtnFavorite onPress={cLick}>
+              <Image source={require("./assets/star.png")} />
+              <Textfavorite>Favoritar</Textfavorite>
+            </BtnFavorite>
+          )}
+          <WrapperNumberOfStars route={route.name}>
             <Image source={require("./assets/star.png")} />
             <TextNumberStar>{stargazers_count}</TextNumberStar>
           </WrapperNumberOfStars>

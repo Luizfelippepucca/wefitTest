@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Container, Content, ContentLoading, Loading } from "./styles";
 import { Animated, Easing, FlatList, ListRenderItem, Text } from "react-native";
 import Header from "@components/Header";
@@ -8,23 +8,14 @@ import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Card from "@components/Card";
 import axios from "axios";
-
-export interface RequestProps {
-  full_name: string;
-  description: string;
-  stargazers_count: string;
-  language: string;
-  html_url: string;
-  id: number;
-  owner: {
-    avatar_url: string;
-  };
-}
+import { CardProps } from "@components/Card/types";
+import { RequestProps } from "./types";
 
 const Repository = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
   const [list, setList] = useState<RequestProps[]>([]);
+  const [listFavorite, setListFavorite] = useState<CardProps[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const AnimatedLoading = Animated.createAnimatedComponent(Loading);
   const spin = new Animated.Value(0);
@@ -55,6 +46,28 @@ const Repository = () => {
     }
   };
 
+  const handleAddfavorite = async (item: RequestProps) => {
+    const favoriteClone = [...listFavorite];
+
+    const newItem: CardProps = {
+      avatar: item.owner.avatar_url,
+      html_url: item.html_url,
+      description: item.description,
+      full_name: item.full_name,
+      language: item.language,
+      id: item.id,
+      stargazers_count: item.stargazers_count,
+    };
+
+    favoriteClone.push(newItem);
+
+    setListFavorite(favoriteClone);
+    await AsyncStorage.setItem(
+      "@AsyncStorage:favorites",
+      JSON.stringify(favoriteClone)
+    );
+  };
+
   const renderItem: ListRenderItem<RequestProps> = ({ item }) => {
     return (
       <Card
@@ -66,6 +79,7 @@ const Repository = () => {
         stargazers_count={item.stargazers_count}
         key={item.id}
         avatar={item.owner.avatar_url}
+        cLick={() => handleAddfavorite(item)}
       />
     );
   };
