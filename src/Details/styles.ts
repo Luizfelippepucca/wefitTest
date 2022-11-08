@@ -76,6 +76,17 @@ export const BtnFavorite = styled.TouchableOpacity`
   flex-direction: row;
 `;
 
+export const BtnUnfavorite = styled.TouchableOpacity`
+  border-radius: 4px;
+  width: 100%;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  border-width: 1px;
+  border-color: #000;
+`;
+
 export const TextBtn = styled.Text`
   color: #000;
   font-family: "Roboto_500Medium";

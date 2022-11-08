@@ -1,7 +1,7 @@
 import { DetailsScreenProps } from "@components/MenuTabs/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import { Image, TouchableWithoutFeedback } from "react-native";
 import {
   Container,
@@ -61,7 +61,6 @@ const Card = ({
             <Title>{title}</Title>
             <SubTitle>/{subtitle}</SubTitle>
           </WrapperTitle>
-
           <AvatarCard source={{ uri: avatar }} />
         </CardHeader>
         <WrapperDescription>
