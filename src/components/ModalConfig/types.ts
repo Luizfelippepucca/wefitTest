@@ -1,5 +1,3 @@
-import { Animated } from "react-native";
-
 export interface ModalConfigProps {
   onClose: () => void;
 }

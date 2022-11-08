@@ -40,8 +40,10 @@ const Details = () => {
 
   const getDataCard = useCallback(async () => {
     const jsonValue = await AsyncStorage.getItem("@AsyncStorage:infosCard");
+
     if (jsonValue !== null) {
       const dataCard = JSON.parse(jsonValue);
+
       setCardItem(dataCard);
       return;
     }
@@ -53,6 +55,7 @@ const Details = () => {
     );
     if (favoriteListJson !== null) {
       const list = JSON.parse(favoriteListJson);
+      console.log(list);
       list.map((element: CardProps) => {
         if (cardItem?.id === element.id) {
           setIsFavorite(true);
@@ -88,13 +91,13 @@ const Details = () => {
             <TextLink>Ver repositório</TextLink>
             <Image source={require(`./assets/link.png`)} />
           </LinkContainer>
-          {isFavorite && (
+          {!isFavorite && (
             <BtnFavorite style={{ elevation: 2 }}>
               <TextBtn>Favoritar</TextBtn>
               <Image source={require(`./assets/starDark.png`)} />
             </BtnFavorite>
           )}
-          {!isFavorite && (
+          {isFavorite && (
             <BtnUnfavorite>
               <TextBtn>Desfavoritar</TextBtn>
               <Image source={require(`./assets/startFill.png`)} />

@@ -1,7 +1,7 @@
 import { DetailsScreenProps } from "@components/MenuTabs/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import { Image, TouchableWithoutFeedback } from "react-native";
 import {
   Container,

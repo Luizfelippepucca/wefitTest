@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { TouchableWithoutFeedback, Animated } from "react-native";
+import { TouchableWithoutFeedback } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ModalConfigProps } from "./types";
+import useDebounce from "src/hooks";
 
 import {
   AreaButtons,
@@ -16,24 +18,15 @@ import {
   TextButton,
 } from "./styles";
 
-import { ModalConfigProps } from "./types";
-import useDebounce from "src/hooks";
-
 const ModalConfig = ({ onClose }: ModalConfigProps) => {
-  const [teste, setTeste] = useState("");
-  const { debounce } = useDebounce();
+  const [valueInput, setValueInput] = useState("");
 
   const handleChangeUserName = (text: string) => {
-    /* Foi necessário fazer desta forma,
-    pois toda vez que faço o setState,o teclado está fechando automaticamente.
-    Pesquisei pelas possiveis soluções em issues inclusive de att dependencia e nenhum funcionou,
-    creio que seja algum problema da versão com expo.
-    */
-    debounce(() => setTeste(text));
+    setValueInput(text);
   };
 
   const handleSaveName = async () => {
-    await AsyncStorage.setItem("@asyncStorage:userName", teste);
+    await AsyncStorage.setItem("@asyncStorage:userName", valueInput);
     onClose();
   };
 
@@ -44,7 +37,11 @@ const ModalConfig = ({ onClose }: ModalConfigProps) => {
           <Divider />
           <ContentInput>
             <Label>Alterar usuário selecionado</Label>
-            <Input onChangeText={handleChangeUserName} placeholder={teste} />
+            <Input
+              onChangeText={handleChangeUserName}
+              placeholder={valueInput}
+              value={valueInput}
+            />
             <LabelInsideInput>Nome do usuário</LabelInsideInput>
           </ContentInput>
           <AreaButtons>

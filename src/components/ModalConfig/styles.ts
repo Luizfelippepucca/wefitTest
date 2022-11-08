@@ -2,8 +2,6 @@ import styled from "styled-components/native";
 import { Dimensions } from "react-native";
 import { TextButtonProps } from "./types";
 
-const windowWidth = Dimensions.get("window").width;
-
 export const Overlay = styled.View`
   width: 100%;
   height: 100%;
