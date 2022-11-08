@@ -25,6 +25,7 @@ import {
 const Details = () => {
   const [cardItem, setCardItem] = useState<CardProps | null>(null);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const [listFavorite, setListFavorite] = useState<CardProps[]>([]);
   const nameFull = cardItem?.full_name.split("/");
   const title = nameFull && nameFull[0];
   const subtitle = nameFull && nameFull[1];
@@ -32,6 +33,27 @@ const Details = () => {
 
   const handleNavigate = () => {
     goBack();
+  };
+
+  const handleAddfavorite = async () => {
+    const favoriteClone = [...listFavorite];
+    if (cardItem) {
+      const newItem: CardProps = {
+        avatar: cardItem?.avatar,
+        html_url: cardItem?.html_url,
+        description: cardItem?.description,
+        full_name: cardItem?.full_name,
+        language: cardItem?.language,
+        id: cardItem?.id,
+        stargazers_count: cardItem?.stargazers_count,
+      };
+      favoriteClone.push(newItem);
+      setListFavorite(favoriteClone);
+      await AsyncStorage.setItem(
+        "@AsyncStorage:favorites",
+        JSON.stringify(favoriteClone)
+      );
+    }
   };
 
   const handleOpenLink = () => {
@@ -54,9 +76,9 @@ const Details = () => {
       `@AsyncStorage:favorites`
     );
     if (favoriteListJson !== null) {
-      const list = JSON.parse(favoriteListJson);
-
-      list.map((element: CardProps) => {
+      const list: CardProps[] = JSON.parse(favoriteListJson);
+      setListFavorite(list);
+      list?.map((element: CardProps) => {
         if (cardItem?.id === element.id) {
           setIsFavorite(true);
         }
@@ -92,7 +114,10 @@ const Details = () => {
             <Image source={require(`./assets/link.png`)} />
           </LinkContainer>
           {!isFavorite && (
-            <BtnFavorite style={{ elevation: 2 }}>
+            <BtnFavorite
+              style={{ elevation: 2 }}
+              onPress={() => handleAddfavorite()}
+            >
               <TextBtn>Favoritar</TextBtn>
               <Image source={require(`./assets/starDark.png`)} />
             </BtnFavorite>
